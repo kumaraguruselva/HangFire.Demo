@@ -35,6 +35,6 @@ app.MapControllers();
 app.UseHangfireDashboard();
 app.MapHangfireDashboard();
 
-RecurringJob.AddOrUpdate<IserviceManagement>(x => x.SyncData(), cronExpression: "0 * * ? * *");
+//RecurringJob.AddOrUpdate<IserviceManagement>(x => x.SyncData(), cronExpression: "0 * * ? * *");
 
 app.Run();

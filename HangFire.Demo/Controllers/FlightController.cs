@@ -7,6 +7,7 @@ namespace HangFire.Demo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FlightController : Controller
     {
         public static List<Flight> flights = new List<Flight>();
@@ -24,7 +25,7 @@ namespace HangFire.Demo.Controllers
                 flights.Add(flight);
                 _iserviceManagement.InsertRecords(flight);
                 BackgroundJob.Enqueue<IserviceManagement>(x => x.SendEmail());
-                return CreatedAtAction("GetPilot", new { flight.Id }, flight);
+                return CreatedAtAction("GetFlight", new { flight.Id }, flight);
             }
             return BadRequest();
         }
@@ -39,11 +40,6 @@ namespace HangFire.Demo.Controllers
                 return NotFound();
             BackgroundJob.Enqueue<IserviceManagement>(x => x.SyncData());
             return Ok(flight);
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
     }
 }
